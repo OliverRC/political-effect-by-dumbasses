@@ -1,34 +1,33 @@
 {
-    "name": "political-effected-by-dumbasses",
-    "description": "",
-    "private": true,
-    "version": "1.0.0",
-
-    "dependencies": {
-        "@angular/forms": "~2.1.1",
-        "@angular/common": "~2.1.1",
-        "@angular/compiler": "~2.1.1",
-        "@angular/core": "~2.1.1",
-        "@angular/platform-browser": "~2.1.1",
-        "@angular/platform-browser-dynamic": "~2.1.1",
-        "core-js": "^2.4.1",
-        "rxjs": "5.0.0-beta.12",
-        "systemjs": "^0.19.40",
-        "zone.js": "^0.6.26"
-    },
-
-    "devDependencies": {
-        "@types/core-js": "^0.9.34",
-        "@types/node": "^6.0.45",
-        "concurrently": "^3.0.0",
-        "lite-server": "^2.2.2",
-        "typescript": "^2.0.3"
-    },
-
-    "scripts": {
-        "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
-        "lite": "lite-server",
-        "tsc": "tsc",
-        "tsc:w": "tsc -w"
-    }
+  "name": "political-effected-by-dumbasses",
+  "description": "",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@angular/common": "~2.1.1",
+    "@angular/compiler": "~2.1.1",
+    "@angular/core": "~2.1.1",
+    "@angular/forms": "~2.1.1",
+    "@angular/platform-browser": "~2.1.1",
+    "@angular/platform-browser-dynamic": "~2.1.1",
+    "chart.js": "^2.5.0",
+    "core-js": "^2.4.1",
+    "ng2-charts": "^1.5.0",
+    "rxjs": "5.0.0-beta.12",
+    "systemjs": "^0.19.40",
+    "zone.js": "^0.6.26"
+  },
+  "devDependencies": {
+    "@types/core-js": "^0.9.34",
+    "@types/node": "^6.0.45",
+    "concurrently": "^3.0.0",
+    "lite-server": "^2.2.2",
+    "typescript": "^2.0.3"
+  },
+  "scripts": {
+    "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
+    "lite": "lite-server",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w"
+  }
 }
