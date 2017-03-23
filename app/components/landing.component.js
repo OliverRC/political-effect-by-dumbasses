@@ -9,12 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
 require("node_modules/chart.js/dist/Chart.js");
+const core_1 = require("@angular/core");
+const exhangeRate_service_1 = require("../services/exhangeRate.service");
 let LandingComponent = class LandingComponent {
-    constructor() {
-        this.exchangeOption = "USD/GBP";
-        this.exchangeOptions = ["USD/GBP", "USD/ZAR", "GBP/ZAR"];
+    constructor(exchangeService) {
+        this.exchangeService = exchangeService;
+        this.exchangeOption = "USDGBP";
+        this.exchangeOptions = ["USDGBP", "USDZAR", "GBPZAR"];
         this.lineChartData = [{ data: [65, 59, 80, 81, 56, 55, 40], label: this.exchangeOption }];
         this.lineChartLabels = ['11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35'];
         this.lineChartOptions = { responsive: true };
@@ -28,6 +30,9 @@ let LandingComponent = class LandingComponent {
                 pointHoverBorderColor: 'rgba(148,159,177,0.8)'
             }
         ];
+        exchangeService.getExchangeRateData(this.exchangeOption).subscribe((val) => {
+            console.log(val);
+        });
     }
     trump() {
         let data = this.lineChartData[0].data;
@@ -53,10 +58,11 @@ let LandingComponent = class LandingComponent {
 };
 LandingComponent = __decorate([
     core_1.Component({
+        moduleId: module.id,
         selector: "app",
-        templateUrl: "app/landing.html"
+        templateUrl: "landing.html"
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [exhangeRate_service_1.ExchangeService])
 ], LandingComponent);
 exports.LandingComponent = LandingComponent;
 //# sourceMappingURL=landing.component.js.map

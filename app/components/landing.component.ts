@@ -1,14 +1,16 @@
-import { Component, NgModule } from "@angular/core";
 require("node_modules/chart.js/dist/Chart.js")
+import { Component, NgModule } from "@angular/core";
+import { ExchangeService } from "../services/exhangeRate.service";
 
 @Component({
+    moduleId: module.id,
     selector: "app",
-    templateUrl: "app/landing.html"
+    templateUrl: "landing.html"
 })
 export class LandingComponent {
 
-    public exchangeOption: string = "USD/GBP";
-    public exchangeOptions: string[] = ["USD/GBP", "USD/ZAR", "GBP/ZAR"];
+    public exchangeOption: string = "USDGBP";
+    public exchangeOptions: string[] = ["USDGBP", "USDZAR", "GBPZAR"];
 
     public lineChartData: Array<any> = [{ data: [65, 59, 80, 81, 56, 55, 40], label: this.exchangeOption }];
 
@@ -27,8 +29,10 @@ export class LandingComponent {
         }
     ];
 
-    constructor() {
-
+    constructor(private exchangeService: ExchangeService) {
+      exchangeService.getExchangeRateData(this.exchangeOption).subscribe((val)=> {
+        console.log(val);
+      });
     }
 
     trump():void{

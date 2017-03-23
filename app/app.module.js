@@ -12,12 +12,20 @@ const platform_browser_1 = require("@angular/platform-browser");
 const forms_1 = require("@angular/forms");
 const landing_component_1 = require("./components/landing.component");
 const ng2_charts_1 = require("ng2-charts");
+const angularfire2_1 = require("angularfire2");
+const exhangeRate_service_1 = require("./services/exhangeRate.service");
+// Must export the config
+exports.firebaseConfig = {
+    apiKey: 'AIzaSyBLgmCfECNXnAf6uWi5Z5YL7hlkrnUyGvQ',
+    authDomain: 'politicaleffectbydumbasses.firebaseio.com',
+    databaseURL: 'https://politicaleffectbydumbasses.firebaseio.com/'
+};
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     core_1.NgModule({
         bootstrap: [landing_component_1.LandingComponent],
-        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, ng2_charts_1.ChartsModule],
+        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, ng2_charts_1.ChartsModule, angularfire2_1.AngularFireModule.initializeApp(exports.firebaseConfig), exhangeRate_service_1.ExchangeService],
         declarations: [landing_component_1.LandingComponent]
     })
 ], AppModule);
