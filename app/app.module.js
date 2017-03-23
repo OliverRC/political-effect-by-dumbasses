@@ -12,14 +12,13 @@ const platform_browser_1 = require("@angular/platform-browser");
 const forms_1 = require("@angular/forms");
 const landing_component_1 = require("./components/landing.component");
 const ng2_charts_1 = require("ng2-charts");
-const line_chart_demo_1 = require("./components/line-chart-demo");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     core_1.NgModule({
         bootstrap: [landing_component_1.LandingComponent],
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, ng2_charts_1.ChartsModule],
-        declarations: [landing_component_1.LandingComponent, line_chart_demo_1.LineChartDemoComponent]
+        declarations: [landing_component_1.LandingComponent]
     })
 ], AppModule);
 exports.AppModule = AppModule;

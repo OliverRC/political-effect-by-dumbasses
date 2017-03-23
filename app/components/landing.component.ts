@@ -1,4 +1,5 @@
 import { Component, NgModule } from "@angular/core";
+require("node_modules/chart.js/dist/Chart.js")
 
 @Component({
     selector: "app",
@@ -7,17 +8,13 @@ import { Component, NgModule } from "@angular/core";
 export class LandingComponent {
 
     public exchangeOption: string = "USD/GBP";
-    public exchangeOptions: string[] = ["USD/GBP", "USD/ZAR", "GBP/ZAR"]
+    public exchangeOptions: string[] = ["USD/GBP", "USD/ZAR", "GBP/ZAR"];
 
-    public lineChartData: Array<any> = [
-        { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
-    ];
-    
-    public lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+    public lineChartData: Array<any> = [{ data: [65, 59, 80, 81, 56, 55, 40], label: this.exchangeOption }];
 
-    public lineChartOptions: any = {
-        responsive: true
-    };
+    public lineChartLabels: Array<any> = ['11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35'];
+
+    public lineChartOptions: any = { responsive: true };
 
     public lineChartColors: Array<any> = [
         { // grey
@@ -31,6 +28,37 @@ export class LandingComponent {
     ];
 
     constructor() {
+
+    }
+
+    trump():void{
+      let data = this.lineChartData[0].data;
+      let lastValue:number = data[data.length-1];
+
+
+      let delta = Math.floor(Math.random() * 6) + 1;
+      console.log(delta);
+      lastValue -= delta;
+
+      var currentdate = new Date();
+      var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear() + " @ "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+
+      this.lineChartLabels.push(datetime);
+
+      data.push(lastValue);
+      this.lineChartData = [{ data: data, label: this.exchangeOption }];
+    }
+
+    zuma():void{
+
+    }
+
+    brexit():void{
 
     }
 }

@@ -4,12 +4,18 @@
         <option *ngFor="let exchangeOption of exchangeOptions">{{exchangeOption}}</option>
     </select>
 
+    <button (click)="trump()">Trump.... Say Something Stupid</button>
+    <button (click)="zuma()">Zuma ... he he he he </button>
+    <button (click)="brexit()">Brexit It!</button>
+
       <canvas baseChart width="400" height="400"
                 [datasets]="lineChartData"
                 [labels]="lineChartLabels"
                 [options]="lineChartOptions"
                 [colors]="lineChartColors"
-                legend=true
-                chartType="line"></canvas>
+                [legend]="'true'"
+                [chartType]="'line'"></canvas>
+
+
 
 </div>
