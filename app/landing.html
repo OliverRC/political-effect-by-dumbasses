@@ -4,6 +4,12 @@
         <option *ngFor="let exchangeOption of exchangeOptions">{{exchangeOption}}</option>
     </select>
 
-    <line-chart-demo>chart</line-chart-demo>
+      <canvas baseChart width="400" height="400"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                legend=true
+                chartType="line"></canvas>
 
 </div>
