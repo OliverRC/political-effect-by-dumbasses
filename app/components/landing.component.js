@@ -42,23 +42,49 @@ let LandingComponent = class LandingComponent {
             }
         ];
         this.exchangeRates["USDGBP"] = new ExchangeRateData([0.79898, 0.8005, 0.80188, 0.79823, 0.78811, 0.79875, 0.81247], ['11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35']);
-        this.exchangeRates["USDZAR"] = new ExchangeRateData([65, 59, 80, 81, 56, 55, 40], ['11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35']);
-        this.exchangeRates["GBPZAR"] = new ExchangeRateData([65, 59, 80, 81, 56, 55, 40], ['11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35']);
+        this.exchangeRates["USDZAR"] = new ExchangeRateData([16.12, 15.32, 14.5, 13.21, 13.01, 12.9, 12.45], ['11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35']);
+        this.exchangeRates["GBPZAR"] = new ExchangeRateData([24.12, 23.54, 21.7, 22.12, 18.21, 16.75, 15.58], ['11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35']);
+        this.emptyLabels();
+        this.fillLabels(this.exchangeRates[this.currentOption].labels);
         this.currentData = [{ data: this.exchangeRates[this.currentOption].data, label: this.currentOption }];
     }
     onExchangeOptionChange() {
+        this.emptyLabels();
+        this.fillLabels(this.exchangeRates[this.currentOption].labels);
         this.currentData = [{ data: this.exchangeRates[this.currentOption].data, label: this.currentOption }];
     }
     trump() {
-        if (this.currentOption !== "USDGBP") {
+        this.effectExchange("USDGBP", () => (Math.random() / 50) * -1);
+        this.effectExchange("USDZAR", () => (Math.random() / 2) * -1);
+    }
+    zuma() {
+        this.effectExchange("USDZAR", () => Math.random());
+        this.effectExchange("GBPZAR", () => Math.random() / 2);
+    }
+    brexit() {
+        this.effectExchange("USDGBP", () => Math.random() / 50);
+        this.effectExchange("GBPZAR", () => (Math.random() * 2) * -1);
+    }
+    fillLabels(labels) {
+        for (var label in labels) {
+            this.currentLabels.push(label);
+        }
+    }
+    emptyLabels() {
+        while (this.currentLabels.length > 0) {
+            this.currentLabels.pop();
+        }
+    }
+    effectExchange(option, deltaAmount) {
+        if (this.currentOption !== option) {
             return;
         }
-        let exchangeRateData = this.exchangeRates["USDGBP"];
+        let exchangeRateData = this.exchangeRates[option];
         let data = exchangeRateData.data;
         let lastValue = data[data.length - 1];
-        let delta = Math.random() / 50;
+        let delta = deltaAmount();
         console.log(delta);
-        lastValue -= delta;
+        lastValue += delta;
         var currentdate = new Date();
         var datetime = currentdate.getDate() + "/"
             + (currentdate.getMonth() + 1) + "/"
@@ -70,10 +96,6 @@ let LandingComponent = class LandingComponent {
         this.currentLabels.push(datetime);
         exchangeRateData.data.push(lastValue);
         this.currentData = [{ data: exchangeRateData.data, label: this.currentOption }];
-    }
-    zuma() {
-    }
-    brexit() {
     }
 };
 LandingComponent = __decorate([
