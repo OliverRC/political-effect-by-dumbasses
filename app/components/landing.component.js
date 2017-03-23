@@ -11,28 +11,52 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 require("node_modules/chart.js/dist/Chart.js");
+class ExchangeRateData {
+    constructor(data, labels) {
+        this.data = data;
+        this.labels = labels;
+    }
+}
+exports.ExchangeRateData = ExchangeRateData;
 let LandingComponent = class LandingComponent {
     constructor() {
-        this.exchangeOption = "USD/GBP";
-        this.exchangeOptions = ["USD/GBP", "USD/ZAR", "GBP/ZAR"];
-        this.lineChartData = [{ data: [65, 59, 80, 81, 56, 55, 40], label: this.exchangeOption }];
-        this.lineChartLabels = ['11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35'];
-        this.lineChartOptions = { responsive: true };
+        this.exchangeRates = {};
+        this.currentOption = "USDGBP";
+        this.exchangeOptions = ["USDGBP", "USDZAR", "GBPZAR"];
+        this.currentData = [{ data: [], label: "no selection" }];
+        this.currentLabels = ['11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35'];
+        this.lineChartOptions = {
+            responsive: true,
+            defaultFontColor: '#fff',
+            global: { defaultFontColor: '#fff' },
+            legend: { labels: { fontColor: '#fff' } }
+        };
         this.lineChartColors = [
             {
-                backgroundColor: 'rgba(148,159,177,0.2)',
-                borderColor: 'rgba(148,159,177,1)',
-                pointBackgroundColor: 'rgba(148,159,177,1)',
-                pointBorderColor: '#fff',
+                backgroundColor: 'rgba(25,151,198,0.1)',
+                borderColor: 'rgba(25,151,198,1)',
+                pointBackgroundColor: 'rgba(25,151,198,1)',
+                pointBorderColor: '#1997c6',
                 pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+                pointHoverBorderColor: 'rgba(25,151,198,0.8)'
             }
         ];
+        this.exchangeRates["USDGBP"] = new ExchangeRateData([0.79898, 0.8005, 0.80188, 0.79823, 0.78811, 0.79875, 0.81247], ['11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35']);
+        this.exchangeRates["USDZAR"] = new ExchangeRateData([65, 59, 80, 81, 56, 55, 40], ['11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35']);
+        this.exchangeRates["GBPZAR"] = new ExchangeRateData([65, 59, 80, 81, 56, 55, 40], ['11:05', '11:10', '11:15', '11:20', '11:25', '11:30', '11:35']);
+        this.currentData = [{ data: this.exchangeRates[this.currentOption].data, label: this.currentOption }];
+    }
+    onExchangeOptionChange() {
+        this.currentData = [{ data: this.exchangeRates[this.currentOption].data, label: this.currentOption }];
     }
     trump() {
-        let data = this.lineChartData[0].data;
+        if (this.currentOption !== "USDGBP") {
+            return;
+        }
+        let exchangeRateData = this.exchangeRates["USDGBP"];
+        let data = exchangeRateData.data;
         let lastValue = data[data.length - 1];
-        let delta = Math.floor(Math.random() * 6) + 1;
+        let delta = Math.random() / 50;
         console.log(delta);
         lastValue -= delta;
         var currentdate = new Date();
@@ -42,9 +66,10 @@ let LandingComponent = class LandingComponent {
             + currentdate.getHours() + ":"
             + currentdate.getMinutes() + ":"
             + currentdate.getSeconds();
-        this.lineChartLabels.push(datetime);
-        data.push(lastValue);
-        this.lineChartData = [{ data: data, label: this.exchangeOption }];
+        exchangeRateData.labels.push(datetime);
+        this.currentLabels.push(datetime);
+        exchangeRateData.data.push(lastValue);
+        this.currentData = [{ data: exchangeRateData.data, label: this.currentOption }];
     }
     zuma() {
     }

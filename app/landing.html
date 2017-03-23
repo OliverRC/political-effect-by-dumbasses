@@ -1,21 +1,29 @@
 <div>
+    <div class="row">
+        <div class="col-md-3">
+            <select name="exchangeOption" [(ngModel)]="currentOption" (ngModelChange)="onExchangeOptionChange()">
+                <option *ngFor="let exchangeOption of exchangeOptions">{{exchangeOption}}</option>
+            </select>
+        </div>
+        <div class="col-md-9 right">
+            <div class="pull-right">
+            <button (click)="trump()" class="btn btn-success">Trump.... Say Something Stupid</button>
+            <button (click)="zuma()" class="btn btn-success">Zuma ... he he he he </button>
+            <button (click)="brexit()" class="btn btn-success">Brexit It!</button>
+            </div>
+        </div>
+    </div>
 
-    <select name="exchangeOption" [(ngModel)]="exchangeOption" required>
-        <option *ngFor="let exchangeOption of exchangeOptions">{{exchangeOption}}</option>
-    </select>
-
-    <button (click)="trump()">Trump.... Say Something Stupid</button>
-    <button (click)="zuma()">Zuma ... he he he he </button>
-    <button (click)="brexit()">Brexit It!</button>
-
-      <canvas baseChart width="400" height="400"
-                [datasets]="lineChartData"
-                [labels]="lineChartLabels"
-                [options]="lineChartOptions"
-                [colors]="lineChartColors"
-                [legend]="'true'"
-                [chartType]="'line'"></canvas>
-
-
-
+    <div class="row">
+        <div class="col-md-12">
+               <canvas baseChart 
+                       [datasets]="currentData" 
+                       [labels]="currentLabels" 
+                       [options]="lineChartOptions"
+                       [colors]="lineChartColors" 
+                       [legend]="'true'" 
+                       [chartType]="'line'">
+                </canvas>
+        </div>
+    </div>
 </div>
